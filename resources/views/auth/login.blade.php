@@ -60,8 +60,8 @@
                         <div>
                             <label for="email" class="block text-sm mb-2 dark:text-white">Email address</label>
                             <div class="relative">
-                                <input type="email" id="email" name="email"
-                                    class="py-2.5 sm:py-3 px-4 block w-full border-gray-200 rounded-lg sm:text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                                <input type="email" id="email" name="email" value="{{ old('email') }}"
+                                    class="py-2.5 sm:py-3 px-4 block w-full border-gray-200 rounded-lg sm:text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600 @error('email') border-red-500 @enderror" 
                                     required aria-describedby="email-error">
                                 <div class="hidden absolute inset-y-0 end-0 pointer-events-none pe-3">
                                     <svg class="size-5 text-red-500" width="16" height="16" fill="currentColor"
@@ -71,26 +71,49 @@
                                     </svg>
                                 </div>
                             </div>
-                            <p class="hidden text-xs text-red-600 mt-2" id="email-error">Please include a valid email
-                                address so we can get back to you</p>
+                            @error('email')    
+                            <p class="text-xs text-red-600 mt-2" id="email-error">{{ $message }}</p>
+                            @enderror
                         </div>
 
                         <div>
                             <div class="max-w-sm space-y-3">
                                 <div>
-                                    <label for="hs-trailing-icon" class="block text-sm mb-2 dark:text-white">Password</label>
+                                    <label for="password" class="block text-sm mb-2 dark:text-white">Password</label>
                                     <div class="relative">
-                                    <input type="password" id="hs-trailing-icon" name="hs-trailing-icon" class="py-2.5 sm:py-3 px-4 pe-11 block w-full border-gray-200 rounded-lg sm:text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="xxxxxx" required>
-                                    <div class="absolute inset-y-0 end-0 flex items-center cursor-pointer z-20 pe-4 hs-tooltip">    
-                                        <svg class="shrink-0 size-5 text-gray-500 dark:text-neutral-500" xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512"><path fill="currentColor" d="M432 448a15.92 15.92 0 0 1-11.31-4.69l-352-352a16 16 0 0 1 22.62-22.62l352 352A16 16 0 0 1 432 448M248 315.85l-51.79-51.79a2 2 0 0 0-3.39 1.69a64.11 64.11 0 0 0 53.49 53.49a2 2 0 0 0 1.69-3.39m16-119.7L315.87 248a2 2 0 0 0 3.4-1.69a64.13 64.13 0 0 0-53.55-53.55a2 2 0 0 0-1.72 3.39"/><path fill="currentColor" d="M491 273.36a32.2 32.2 0 0 0-.1-34.76c-26.46-40.92-60.79-75.68-99.27-100.53C349 110.55 302 96 255.68 96a226.5 226.5 0 0 0-71.82 11.79a4 4 0 0 0-1.56 6.63l47.24 47.24a4 4 0 0 0 3.82 1.05a96 96 0 0 1 116 116a4 4 0 0 0 1.05 3.81l67.95 68a4 4 0 0 0 5.4.24a343.8 343.8 0 0 0 67.24-77.4M256 352a96 96 0 0 1-93.3-118.63a4 4 0 0 0-1.05-3.81l-66.84-66.87a4 4 0 0 0-5.41-.23c-24.39 20.81-47 46.13-67.67 75.72a31.92 31.92 0 0 0-.64 35.54c26.41 41.33 60.39 76.14 98.28 100.65C162.06 402 207.92 416 255.68 416a238.2 238.2 0 0 0 72.64-11.55a4 4 0 0 0 1.61-6.64l-47.47-47.46a4 4 0 0 0-3.81-1.05A96 96 0 0 1 256 352"/></svg>
-                                        <span class="hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible opacity-0 transition-opacity inline-block absolute invisible z-10 py-1 px-2 bg-gray-900 text-xs font-medium text-white rounded-md shadow-2xs dark:bg-neutral-700" role="tooltip">
-                                        show
-                                        </span>
-                                    </div>
+                                        <input type="password" id="password" name="password" value="{{ old('password') }}"
+                                            class="py-2.5 sm:py-3 px-4 pe-11 block w-full border-gray-200 rounded-lg sm:text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600 @error('password') border-red-500 @enderror" 
+                                            placeholder="xxxxxx" required>
+                                        <div class="absolute inset-y-0 end-0 flex items-center cursor-pointer z-20 pe-4 hs-tooltip"
+                                            id="show-password">
+                                            <div class="tooltip-toggle" id="hs-password-tooltip">
+                                                <svg id="password-hide" class="shrink-0 size-5 text-gray-500 dark:text-neutral-500"
+                                                    xmlns="http://www.w3.org/2000/svg" width="512" height="512"
+                                                    viewBox="0 0 512 512">
+                                                    <path fill="currentColor"
+                                                        d="M432 448a15.92 15.92 0 0 1-11.31-4.69l-352-352a16 16 0 0 1 22.62-22.62l352 352A16 16 0 0 1 432 448M248 315.85l-51.79-51.79a2 2 0 0 0-3.39 1.69a64.11 64.11 0 0 0 53.49 53.49a2 2 0 0 0 1.69-3.39m16-119.7L315.87 248a2 2 0 0 0 3.4-1.69a64.13 64.13 0 0 0-53.55-53.55a2 2 0 0 0-1.72 3.39" />
+                                                    <path fill="currentColor"
+                                                        d="M491 273.36a32.2 32.2 0 0 0-.1-34.76c-26.46-40.92-60.79-75.68-99.27-100.53C349 110.55 302 96 255.68 96a226.5 226.5 0 0 0-71.82 11.79a4 4 0 0 0-1.56 6.63l47.24 47.24a4 4 0 0 0 3.82 1.05a96 96 0 0 1 116 116a4 4 0 0 0 1.05 3.81l67.95 68a4 4 0 0 0 5.4.24a343.8 343.8 0 0 0 67.24-77.4M256 352a96 96 0 0 1-93.3-118.63a4 4 0 0 0-1.05-3.81l-66.84-66.87a4 4 0 0 0-5.41-.23c-24.39 20.81-47 46.13-67.67 75.72a31.92 31.92 0 0 0-.64 35.54c26.41 41.33 60.39 76.14 98.28 100.65C162.06 402 207.92 416 255.68 416a238.2 238.2 0 0 0 72.64-11.55a4 4 0 0 0 1.61-6.64l-47.47-47.46a4 4 0 0 0-3.81-1.05A96 96 0 0 1 256 352" />
+                                                </svg>
+                                                <svg id="password-show" class="hidden shrink-0 size-5 text-gray-500 dark:text-neutral-500"
+                                                    xmlns="http://www.w3.org/2000/svg" width="576" height="512"
+                                                    viewBox="0 0 576 512">
+                                                    <path fill="currentColor"
+                                                        d="M572.52 241.4C518.29 135.59 410.93 64 288 64S57.68 135.64 3.48 241.41a32.35 32.35 0 0 0 0 29.19C57.71 376.41 165.07 448 288 448s230.32-71.64 284.52-177.41a32.35 32.35 0 0 0 0-29.19M288 400a144 144 0 1 1 144-144a143.93 143.93 0 0 1-144 144m0-240a95.3 95.3 0 0 0-25.31 3.79a47.85 47.85 0 0 1-66.9 66.9A95.78 95.78 0 1 0 288 160" />
+                                                </svg>
+                                                <span
+                                                    class="hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible opacity-0 transition-opacity inline-block absolute invisible z-10 py-1 px-2 bg-gray-900 text-xs font-medium text-white rounded-md shadow-2xs dark:bg-neutral-700"
+                                                    role="tooltip" id="tooltip-name">
+                                                    show
+                                                </span>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <p class="hidden text-xs text-red-600 mt-2" id="password-error">8+ characters required</p>
+                            @error('password')                        
+                                <p class="text-xs text-red-600 mt-2" id="password-error">{{ $message }}</p>
+                            @enderror
                         </div>
 
                         <div class="flex items-center">
@@ -114,6 +137,29 @@
     </div>
 
     @livewireScripts
+
+    <script>
+        const showHidePassword = document.getElementById('show-password');
+        showHidePassword.addEventListener('click', function() {
+            const password = document.getElementById('password');
+            const type = password.getAttribute('type');
+            const iconShowPass = document.getElementById('password-show');
+            const iconHidePass = document.getElementById('password-hide')
+            const tooltipName = document.getElementById('tooltip-name');
+            if(type == 'password'){
+                password.setAttribute('type', 'text');
+                tooltipName.innerHTML = 'hide';
+                iconShowPass.classList.remove('hidden');
+                iconHidePass.classList.add('hidden')
+            } else {
+                password.setAttribute('type', 'password');
+                tooltipName.innerHTML = 'show';
+                iconShowPass.classList.add('hidden');
+                iconHidePass.classList.remove('hidden')
+            }
+            console.log(type)
+        })
+    </script>
 </body>
 
 </html>
