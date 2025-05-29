@@ -58,7 +58,7 @@ class AuthController extends Controller
 
         $request->session()->regenerate();
 
-        return 'welcome' .$user->name;
+        return redirect()->route('dashboard');
 
         // dd($request->all());
     }
